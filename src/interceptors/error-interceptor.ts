@@ -6,17 +6,14 @@ import { Observable } from 'rxjs/Rx';
 export class ErrorInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("Passou no interceptor");
         return next.handle(req)
         .catch((error, caught) => { 
             let errorObj = error;
             if(errorObj.error){
                 errorObj = errorObj.error;
-                console.log("passou 2");    
             }
             if(!errorObj.status){
                 errorObj = JSON.parse(errorObj);
-                console.log("passou 3");    
             }
             console.log("Erro detectado pelo interceptor: ")
             console.log(errorObj)
