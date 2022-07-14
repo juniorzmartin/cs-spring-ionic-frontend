@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
@@ -8,15 +9,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SignupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  formGroup: FormGroup;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public formBuild: FormBuilder
+    ) {
+      this.formGroup = this.formBuild.group({
+        nome : ['',[Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+        email : ['',[Validators.required, Validators.email]],
+        tipo : ['',[Validators.required]],
+        cpfOuCnpj : ['',[Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
+        senha : ['',[Validators.required]],
+        logradouro : ['',[Validators.required]],
+        numero : ['',[Validators.required]],
+        complemento : ['',[]],
+        bairro : ['',[]],
+        cep : ['',[Validators.required]],
+        telefone1 : ['',[Validators.required]],
+        telefone2 : ['',[]],
+        telefone3 : ['',[]],
+        estadoId : [null,[Validators.required]],
+        cidadeId : [null,[Validators.required]],
+      });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
-  }
-
-  signupUser(){
+signupUser(){
     console.log("Enviou o form");
+    console.log(this.formGroup);
   }
 
 }
