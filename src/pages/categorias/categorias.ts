@@ -1,3 +1,4 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
@@ -29,8 +30,8 @@ export class CategoriasPage {
 
   }
   
-  showProdutos(){
-    this.navCtrl.push('ProdutosPage');
+  showProdutos(categoria_id : string){
+    this.navCtrl.push('ProdutosPage', {categoria_id: categoria_id});
   }
 
 }
