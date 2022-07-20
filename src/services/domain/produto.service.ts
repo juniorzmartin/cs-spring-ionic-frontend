@@ -11,4 +11,9 @@ export class ProdutoService {
     findByCategoria(categoria_id: string){
         return this.http.get(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoria_id}`);
     }
+
+    getSmallImageFromBucket(id : string){
+        let url = `${API_CONFIG.bucketBaseUrl}/prod${id}-small.jpg`;
+        return this.http.get(url , {responseType : 'blob'});
+    }
 }
