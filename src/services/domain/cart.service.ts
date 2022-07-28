@@ -11,6 +11,7 @@ export class CartService {
 
     createOrClearCart() : Cart {
         let cart: Cart = {items:[]}
+        this.storage.setCart(cart);
         return cart;
     }
 
