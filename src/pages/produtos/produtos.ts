@@ -22,6 +22,9 @@ export class ProdutosPage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+  loadData(){
     let categoria_id = this.navParams.get('categoria_id');
     let loader = this.presentLoading();
     this.produtoService.findByCategoria(categoria_id)
@@ -33,7 +36,6 @@ export class ProdutosPage {
         loader.dismiss();
       });
   }
-
   loadImageUrls(){
     for(var i = 0; i < this.items.length; i++){
       let item = this.items[i];
@@ -47,11 +49,18 @@ export class ProdutosPage {
     this.navCtrl.push('ProdutoDetailPage',{produto_id : produto_id});
   }
 
-    presentLoading() {
+  presentLoading() {
     let loading = this.loadingCtrl.create({
       content: 'Aguarde',
     }); 
     loading.present();
     return loading;
+  }  
+
+  doRefresh(event) {
+    this.loadData();
+    setTimeout(() => {
+      event.complete();
+    }, 1000);
   }
 }
